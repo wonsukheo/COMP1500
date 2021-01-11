@@ -11,7 +11,7 @@
 
         public static double GetAverage(int num1, int num2, int num3, int num4)
         {
-            int sum = GetSum(num1, num2, num3, num4);
+            double sum = GetSum(num1, num2, num3, num4);
             return sum / 4;
         }
 
