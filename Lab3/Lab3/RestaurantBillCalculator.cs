@@ -45,7 +45,7 @@ namespace Lab3
         {
             string number = input.ReadLine();
             double individualBill = double.Parse(number);
-            uint payerCount = (uint)(totalCost / individualBill);
+            uint payerCount = (uint)(totalCost / individualBill + .99);
             return payerCount;
         }
     }
