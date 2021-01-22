@@ -1,5 +1,5 @@
 ﻿using System.IO;
-
+using System;
 namespace Lab3
 {
     public static class RestaurantBillCalculator
@@ -19,7 +19,7 @@ namespace Lab3
             Console.WriteLine("Please Enter Gratuity in percentage: ");
             double gratuity = double.Parse(input.ReadLine());
 
-            double orderTotal = (priceOrder0 + priceOrder1 + priceOrder2 + priceOrder3 + priceOrder4);
+            double orderTotal = order0 + order1 + order2 + order3 + order4;
             double orderTax = orderTotal * 0.05;
             double orderGratuity = (orderTotal + orderTax) * (gratuity / 100);
             double totalCost = orderTotal + orderTax + orderGratuity;
@@ -38,8 +38,8 @@ namespace Lab3
         public static uint CalculatePayerCount(StreamReader input, double totalCost)
         {
             Console.WriteLine("Individual bill cost: ");
-            individualBill = double.Parse(input.ReadLine());
-            uint payerCount = (totalCost / individualBill * 100 + 0.5) / 100;
+            double individualBill = double.Parse(input.ReadLine());
+            uint payerCount = (uint)(totalCost / individualBill * 100 + 0.5) / 100;
             return payerCount;
         }
     }
