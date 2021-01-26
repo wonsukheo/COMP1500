@@ -28,7 +28,8 @@ namespace Assignment1
                 output.Write(" ");
                 output.Write(Convert.ToString(number[i]).PadLeft(formatWidth));
                 output.Write(" ");
-                output.WriteLine(Convert.ToString(number[i], 16).PadLeft(formatWidth));
+                string hexValue = number[i].ToString("X");
+                output.WriteLine(hexValue.PadLeft(formatWidth));
             }
         }
 
@@ -79,10 +80,10 @@ namespace Assignment1
             double avg = sum / 5;
             string avgformatted = string.Format("{0:f3}", avg);
 
-            output.WriteLine("{0,-7} {1,17}", "Min", minformatted);
-            output.WriteLine("{0,-7} {1,17}", "Max", maxformatted);
-            output.WriteLine("{0,-7} {1,17}", "Sum", sumformatted);
-            output.WriteLine("{0,-7} {1,17}", "Average", avgformatted);
+            output.WriteLine("{0,-7}{1,17}", "Min", minformatted);
+            output.WriteLine("{0,-7}{1,17}", "Max", maxformatted);
+            output.WriteLine("{0,-7}{1,17}", "Sum", sumformatted);
+            output.WriteLine("{0,-7}{1,17}", "Average", avgformatted);
         }
     }
 }
