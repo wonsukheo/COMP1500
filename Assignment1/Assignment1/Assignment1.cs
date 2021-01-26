@@ -24,12 +24,10 @@ namespace Assignment1
 
             for (int i = 0; i < 5; ++i)
             {
-                output.Write(Convert.ToString(number[i]).PadLeft(formatWidth));
                 output.Write(Convert.ToString(number[i], 8).PadLeft(formatWidth));
+                output.Write(Convert.ToString(number[i]).PadLeft(formatWidth));
                 output.WriteLine(Convert.ToString(number[i], 16).PadLeft(formatWidth));
-
             }
-
         }
 
         public static void PrintStats(StreamReader input, StreamWriter output)
@@ -79,10 +77,10 @@ namespace Assignment1
             double avg = sum / 5;
             string avgformatted = string.Format("{0:f3}", avg);
 
-            output.WriteLine("{0,-10}{1,15}", "Min", minformatted);
-            output.WriteLine("{0,-10}{1,15}", "Max", maxformatted);
-            output.WriteLine("{0,-10}{1,15}", "Sum", sumformatted);
-            output.WriteLine("{0,-10}{1,15}", "Average", avgformatted);
+            output.WriteLine("{0,-7} {1,18}", "Min", minformatted);
+            output.WriteLine("{0,-7} {1,18}", "Max", maxformatted);
+            output.WriteLine("{0,-7} {1,18}", "Sum", sumformatted);
+            output.WriteLine("{0,-7} {1,18}", "Average", avgformatted);
         }
     }
 }
