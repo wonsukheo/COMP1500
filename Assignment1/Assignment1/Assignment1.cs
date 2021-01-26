@@ -20,12 +20,14 @@ namespace Assignment1
                 formatWidth = width;
             }
 
-            output.WriteLine("oct".PadLeft(formatWidth) + "dec".PadLeft(formatWidth) + "hex".PadLeft(formatWidth));
+            output.WriteLine("oct".PadLeft(formatWidth) + " " + "dec".PadLeft(formatWidth) + " " + "hex".PadLeft(formatWidth));
 
             for (int i = 0; i < 5; ++i)
             {
                 output.Write(Convert.ToString(number[i], 8).PadLeft(formatWidth));
+                output.Write(" ");
                 output.Write(Convert.ToString(number[i]).PadLeft(formatWidth));
+                output.Write(" ");
                 output.WriteLine(Convert.ToString(number[i], 16).PadLeft(formatWidth));
             }
         }
@@ -77,10 +79,10 @@ namespace Assignment1
             double avg = sum / 5;
             string avgformatted = string.Format("{0:f3}", avg);
 
-            output.WriteLine("{0,-7} {1,18}", "Min", minformatted);
-            output.WriteLine("{0,-7} {1,18}", "Max", maxformatted);
-            output.WriteLine("{0,-7} {1,18}", "Sum", sumformatted);
-            output.WriteLine("{0,-7} {1,18}", "Average", avgformatted);
+            output.WriteLine("{0,-7} {1,17}", "Min", minformatted);
+            output.WriteLine("{0,-7} {1,17}", "Max", maxformatted);
+            output.WriteLine("{0,-7} {1,17}", "Sum", sumformatted);
+            output.WriteLine("{0,-7} {1,17}", "Average", avgformatted);
         }
     }
 }
