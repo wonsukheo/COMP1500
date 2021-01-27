@@ -7,11 +7,11 @@ namespace Assignment1
     {
         public static void PrintIntegers(StreamReader input, StreamWriter output, int width)
         {
-            uint[] number = new uint[5];
+            long[] number = new long[5];
 
             for (int i = 0; i < 5; ++i)
             {
-                number[i] = uint.Parse(input.ReadLine());
+                number[i] = long.Parse(input.ReadLine());
             }
 
             int formatWidth = 10;
@@ -44,28 +44,22 @@ namespace Assignment1
 
             for (int i = 0; i < 5; ++i)
             {
-                string printNumber = string.Format("{0:f3}", number[i]);
+                string threeDecimal = string.Format("{0:f3}", number[i]);
                 
-                output.WriteLine("{0,25}", printNumber);
+                output.WriteLine("{0,25}", threeDecimal);
             }
 
             double min = number[0];
             for (int i = 1; i < 5; ++i)
             {
-                if (number[i] < min)
-                {
-                    min = number[i];
-                }
+                min = Math.Min(min, number[i]);
             }
             string minformatted = string.Format("{0:f3}", min);
 
             double max = number[0];
             for (int i = 1; i < 5; ++i)
             {
-                if (number[i] > max)
-                {
-                    max = number[i];
-                }
+                max = Math.Max(max, number[i]);
             }
             string maxformatted = string.Format("{0:f3}", max);
 
@@ -80,10 +74,10 @@ namespace Assignment1
             double avg = sum / 5;
             string avgformatted = string.Format("{0:f3}", avg);
 
-            output.WriteLine("{0,-7}{1,17}", "Min", minformatted);
-            output.WriteLine("{0,-7}{1,17}", "Max", maxformatted);
-            output.WriteLine("{0,-7}{1,17}", "Sum", sumformatted);
-            output.WriteLine("{0,-7}{1,17}", "Average", avgformatted);
+            output.WriteLine("{0,-7}{1,18}", "Min", minformatted);
+            output.WriteLine("{0,-7}{1,18}", "Max", maxformatted);
+            output.WriteLine("{0,-6}{1,19}", "Sum", sumformatted);
+            output.WriteLine("{0,-7}{1,18}", "Average", avgformatted);
         }
     }
 }
