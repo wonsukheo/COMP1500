@@ -22,6 +22,7 @@ namespace Lab5
                 if (0 <= usersPerDay[i] && usersPerDay[i] <= 10)
                 {
                     expectedRevenue = usersPerDay[i] / 2.00;
+                    expectedRevenue = (int)(expectedRevenue * 100.0 + 0.5) / 100.0;
                     if (expectedRevenue != revenuePerDay[i])
                     {
                         revenuePerDay[i] = expectedRevenue;
@@ -124,7 +125,7 @@ namespace Lab5
 
         public static double CalculateTotalRevenue(double[] revenuePerDay, uint start, uint end)
         {
-            if (revenuePerDay.Length == 0 || start < 0 || end >= revenuePerDay.Length || end < start)
+            if (revenuePerDay.Length == 0 || start < 0 || end < start || end >= revenuePerDay.Length)
             {
                 return -1;
             }
