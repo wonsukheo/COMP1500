@@ -8,7 +8,7 @@ namespace Lab5
     { 
         public static bool TryFixData(uint[] usersPerDay, double[] revenuePerDay)
         {
-            if (usersPerDay.Length != revenuePerDay.Length)
+            if (usersPerDay.Length != revenuePerDay.Length || usersPerDay.Length == 0)
             {
                 return false;
             }
@@ -32,6 +32,7 @@ namespace Lab5
                 if (10 < usersPerDay[i] && usersPerDay[i] <= 100)
                 {
                     expectedRevenue = 16.00 * usersPerDay[i] / 5 - 27;
+                    expectedRevenue = (int)(expectedRevenue * 100.0 + 0.5) / 100.0;
                     if (expectedRevenue != revenuePerDay[i])
                     {
                         revenuePerDay[i] = expectedRevenue;
@@ -42,6 +43,7 @@ namespace Lab5
                 if (100 < usersPerDay[i] && usersPerDay[i] <= 1000)
                 {
                     expectedRevenue = usersPerDay[i] * usersPerDay[i] / 4.00 - 2 * usersPerDay[i] - 2007;
+                    expectedRevenue = (int)(expectedRevenue * 100.0 + 0.5) / 100.0;
                     if (expectedRevenue != revenuePerDay[i])
                     {
                         revenuePerDay[i] = expectedRevenue;
@@ -49,9 +51,10 @@ namespace Lab5
                     }
                 }
 
-                if (usersPerDay[i] > 1000 )
+                if (usersPerDay[i] > 1000)
                 {
                     expectedRevenue = 245743 + usersPerDay[i] / 4.00;
+                    expectedRevenue = (int)(expectedRevenue * 100.0 + 0.5) / 100.0;
                     if (expectedRevenue != revenuePerDay[i])
                     {
                         revenuePerDay[i] = expectedRevenue;
@@ -65,7 +68,7 @@ namespace Lab5
 
         public static int GetInvalidEntryCount(uint[] usersPerDay, double[] revenuePerDay)
         {
-            if (usersPerDay.Length != revenuePerDay.Length)
+            if (usersPerDay.Length != revenuePerDay.Length || usersPerDay.Length == 0)
             {
                 return -1;
             }
@@ -79,6 +82,7 @@ namespace Lab5
                 if (0 <= usersPerDay[i] && usersPerDay[i] <= 10)
                 {
                     expectedRevenue = usersPerDay[i] / 2.00;
+                    expectedRevenue = (int)(expectedRevenue * 100.0 + 0.5) / 100.0;
                     if (expectedRevenue != revenuePerDay[i])
                     {
                         errorfixed++;
@@ -88,6 +92,7 @@ namespace Lab5
                 if (10 < usersPerDay[i] && usersPerDay[i] <= 100)
                 {
                     expectedRevenue = 16.00 * usersPerDay[i] / 5 - 27;
+                    expectedRevenue = (int)(expectedRevenue * 100.0 + 0.5) / 100.0;
                     if (expectedRevenue != revenuePerDay[i])
                     {
                         errorfixed++;
@@ -97,6 +102,7 @@ namespace Lab5
                 if (100 < usersPerDay[i] && usersPerDay[i] <= 1000)
                 {
                     expectedRevenue = usersPerDay[i] * usersPerDay[i] / 4.00 - 2 * usersPerDay[i] - 2007;
+                    expectedRevenue = (int)(expectedRevenue * 100.0 + 0.5) / 100.0;
                     if (expectedRevenue != revenuePerDay[i])
                     {
                         errorfixed++;
@@ -106,6 +112,7 @@ namespace Lab5
                 if (usersPerDay[i] > 1000)
                 {
                     expectedRevenue = 245743 + usersPerDay[i] / 4.00;
+                    expectedRevenue = (int)(expectedRevenue * 100.0 + 0.5) / 100.0;
                     if (expectedRevenue != revenuePerDay[i])
                     {
                         errorfixed++;
@@ -117,7 +124,7 @@ namespace Lab5
 
         public static double CalculateTotalRevenue(double[] revenuePerDay, uint start, uint end)
         {
-            if (revenuePerDay.Length == 0 || start < 0 || end < start || end > revenuePerDay.Length)
+            if (revenuePerDay.Length == 0 || start < 0 || end >= revenuePerDay.Length || end < start)
             {
                 return -1;
             }
