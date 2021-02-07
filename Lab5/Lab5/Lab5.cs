@@ -69,12 +69,17 @@ namespace Lab5
 
         public static int GetInvalidEntryCount(uint[] usersPerDay, double[] revenuePerDay)
         {
-            if (usersPerDay.Length != revenuePerDay.Length || usersPerDay.Length == 0)
+            int errorfixed = 0;
+
+            if (usersPerDay.Length != revenuePerDay.Length)
             {
                 return -1;
             }
 
-            int errorfixed = 0;
+            if (usersPerDay.Length == 0 || revenuePerDay.Length == 0)
+            {
+                return errorfixed;
+            }
 
             for (int i = 0; i < usersPerDay.Length; ++i)
             {
