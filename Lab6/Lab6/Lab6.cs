@@ -31,68 +31,68 @@ namespace Lab6
             int[,] temporaryData = new int[rowSize, columnSize];
 
             switch (rotateMode)
-                {
-                    case EMode.HorizontalMirror:
-                        for (int i = 0; i < rowSize; ++i)
+            {
+                case EMode.HorizontalMirror:
+                    for (int i = 0; i < rowSize; ++i)
+                    {
+                        for (int j = 0; j < columnSize; ++j)
                         {
-                            for (int j = 0; j < columnSize; ++j)
-                            {
                                 temporaryData[i, j] = data[i, columnSize - 1 - j];
-                            }
                         }
-                        data = temporaryData;
-                        break;
+                    }
+                    data = temporaryData;
+                    break;
 
-                    case EMode.VerticalMirror:
-                        for (int i = 0; i < rowSize; ++i)
+                case EMode.VerticalMirror:
+                    for (int i = 0; i < rowSize; ++i)
+                    {
+                        for (int j = 0; j < columnSize; ++j)
                         {
-                            for (int j = 0; j < columnSize; ++j)
-                            {
-                                temporaryData[i, j] = data[rowSize - 1 - i, j];
-                            }
+                            temporaryData[i, j] = data[rowSize - 1 - i, j];
                         }
-                        data = temporaryData;
-                        break;
+                    }
+                    data = temporaryData;
+                    break;
 
-                    case EMode.DiagonalShift:
-                        for (int i = 0; i < rowSize; ++i)
+                case EMode.DiagonalShift:
+                    for (int i = 0; i < rowSize; ++i)
+                    {
+                        for (int j = columnSize - 1; j > 0; --j)
                         {
-                            for (int j = columnSize - 1; j > 0; --j)
-                            {
-                                temporaryData[i, j] = data[i, j - 1];
-                            }
+                            temporaryData[i, j] = data[i, j - 1];
+                        }
                            
-                            temporaryData[i, 0] = data[i, columnSize - 1];
-                        }
+                        temporaryData[i, 0] = data[i, columnSize - 1];
+                    }
 
-                        int[] temporaryArray = new int[columnSize];
+                    int[] temporaryArray = new int[columnSize];
 
+                    for (int j = 0; j < columnSize; ++j)
+                    {
+                        temporaryArray[j] = temporaryData[rowSize - 1, j]; 
+                    }
+                        
+                    for (int i = rowSize - 1; i > 0; --i)
+                    {
                         for (int j = 0; j < columnSize; ++j)
                         {
-                            temporaryArray[j] = temporaryData[rowSize - 1, j]; 
+                            temporaryData[i, j] = temporaryData[i - 1, j];
                         }
+                    }
                         
-                        for (int i = rowSize - 1; i > 0; --i)
-                        {
-                            for (int j = 0; j < columnSize; ++j)
-                            {
-                                temporaryData[i, j] = temporaryData[i - 1, j];
-                            }
-                        }
+                    for (int j = 0; j < columnSize; ++j)
+                    {
+                        temporaryData[0, j] = temporaryArray[j];
+                    }
                         
-                        for (int j = 0; j < columnSize; ++j)
-                        {
-                            temporaryData[0, j] = temporaryArray[j];
-                        }
-                        
-                        data = temporaryData;
+                    data = temporaryData;
 
-                        break;
+                    break;
 
-                    default:
-                        Console.WriteLine("invalid Transform Mode");
-                        break;
-                }
+                default:
+                    Console.WriteLine("invalid Transform Mode");
+                    break;
+            }
             
         }
     }
