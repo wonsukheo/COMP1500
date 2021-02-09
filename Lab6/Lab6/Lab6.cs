@@ -42,7 +42,7 @@ namespace Lab6
                     {
                         for (int j = 0; j < columnSize; ++j)
                         {
-                                temporaryData[i, j] = data[i, columnSize - 1 - j];
+                            temporaryData[i, j] = data[i, columnSize - 1 - j];
                         }
                     }
 
@@ -50,7 +50,7 @@ namespace Lab6
                     {
                         for (int j = 0; j < columnSize; ++j)
                         {
-                            data[i,j] = temporaryData[i, j];
+                            data[i, j] = temporaryData[i, j];
                         }
                     }
                    
