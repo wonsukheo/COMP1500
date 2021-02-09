@@ -24,12 +24,17 @@ namespace Lab6
             return rotated90Array;
         }
 
-        public static void TransformArray(ref int[,] data, EMode rotateMode)
+        public static void TransformArray(int[,] data, EMode rotateMode)
         {
             int rowSize = data.GetLength(0);
             int columnSize = data.GetLength(1);
             int[,] temporaryData = new int[rowSize, columnSize];
-
+            
+            if (rowSize <= 0 || columnSize <= 0)
+            {
+                Console.WriteLine("invalid array");
+                return;
+            }
             switch (rotateMode)
             {
                 case EMode.HorizontalMirror:
@@ -40,7 +45,15 @@ namespace Lab6
                                 temporaryData[i, j] = data[i, columnSize - 1 - j];
                         }
                     }
-                    data = temporaryData;
+
+                    for (int i = 0; i < rowSize; ++i)
+                    {
+                        for (int j = 0; j < columnSize; ++j)
+                        {
+                            data[i,j] = temporaryData[i, j];
+                        }
+                    }
+                   
                     break;
 
                 case EMode.VerticalMirror:
@@ -51,7 +64,15 @@ namespace Lab6
                             temporaryData[i, j] = data[rowSize - 1 - i, j];
                         }
                     }
-                    data = temporaryData;
+                    
+                    for (int i = 0; i < rowSize; ++i)
+                    {
+                        for (int j = 0; j < columnSize; ++j)
+                        {
+                            data[i, j] = temporaryData[i, j];
+                        }
+                    }
+
                     break;
 
                 case EMode.DiagonalShift:
@@ -84,8 +105,14 @@ namespace Lab6
                     {
                         temporaryData[0, j] = temporaryArray[j];
                     }
-                        
-                    data = temporaryData;
+
+                    for (int i = 0; i < rowSize; ++i)
+                    {
+                        for (int j = 0; j < columnSize; ++j)
+                        {
+                            data[i, j] = temporaryData[i, j];
+                        }
+                    }
 
                     break;
 
