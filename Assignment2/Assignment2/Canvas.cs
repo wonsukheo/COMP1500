@@ -68,7 +68,7 @@ namespace Assignment2
                         return invalidFormat;
                     }
 
-                    uint leftcount = 2;
+                    uint leftcount = 2u;
                     uint rightcount = width + leftcount;
                     for (uint i = height + 1; i > 1; --i)
                     {
@@ -114,7 +114,7 @@ namespace Assignment2
             int width = colLength - 4;
             int height = rowLength - 4;
             
-            if (width == 0 && height == 0)
+            if (width == 0 || height == 0)
             {
                 return false;
             }
@@ -135,21 +135,21 @@ namespace Assignment2
             }
             
             EShape canvasShape = EShape.Circle;
-            
-            if (dotCount1 == dotCount2)
+
+            if (dotCount1 == dotCount2 || height == 1)
             {
                 canvasShape = EShape.Rectangle;
             } 
-            else if (dotCount1 - dotCount2 == 1)
+            else if (dotCount1 - dotCount2 == 1 && width == height)
             {
                 canvasShape = EShape.IsoscelesRightTriangle;
             }
-            else if (dotCount1 - dotCount2 == 2)
+            else if (dotCount1 - dotCount2 == 2 && width == height * 2 - 1)
             {
                 canvasShape = EShape.IsoscelesTriangle;
             }
 
-            return canvasShape == shape ? true : false;
+            return (canvasShape == shape) ? true : false;
         }
     }
 }
