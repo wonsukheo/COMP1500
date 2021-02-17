@@ -118,7 +118,10 @@ namespace Assignment2
             {
                 return false;
             }
-
+            if (height == 1 && width == 1)
+            { 
+                return true;
+            } // 이 조건문을 빼봐도 빌드봇 실패가 납니다. (D3,4,5)
             int dotCount1 = 0;
             int dotCount2 = 0;
 
@@ -136,7 +139,7 @@ namespace Assignment2
             
             EShape canvasShape = EShape.Circle;
 
-            if (dotCount1 == dotCount2 || height == 1)
+            if (dotCount1 == dotCount2)
             {
                 canvasShape = EShape.Rectangle;
             } 
