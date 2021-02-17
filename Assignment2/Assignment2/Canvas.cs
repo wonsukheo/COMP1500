@@ -17,7 +17,7 @@ namespace Assignment2
             #region draw_outline
             for (int i = 0; i < height + 4; ++i)
             {
-                for(int j = 0; j < width + 4; ++j)
+                for (int j = 0; j < width + 4; ++j)
                 {
                     if (i == 0 || i == height + 3)
                     {
@@ -92,7 +92,7 @@ namespace Assignment2
                     {
                         for (int j = 2; j < width + 2; ++j)
                         {
-                            if ((center - i)*(center - i) + (center - j)*(center - j) <= radius * radius)
+                            if ((center - i) * (center - i) + (center - j) * (center - j) <= radius * radius)
                             {
                                 canvas[i, j] = '*';
                             }
@@ -109,14 +109,23 @@ namespace Assignment2
 
         public static bool IsShape(char[,] canvas, EShape shape)
         {
+            if (canvas.GetLength(0) == 0)
+            {
+                return false;
+            }
+
             EShape canvasShape;
-            if (canvas[2,2] == '*' && canvas[3,2] == '*')
+
+            if (canvas[2, 2] == '*' && canvas[3, 2] == '*')
             {
                 if (canvas[2, 3] == '*' && canvas[3, 3] == '*')
                 {
                     canvasShape = EShape.Rectangle;
                 }
-                canvasShape = EShape.IsoscelesRightTriangle;
+                else
+                {
+                    canvasShape = EShape.IsoscelesRightTriangle;
+                }
             }
             else
             {
@@ -124,7 +133,10 @@ namespace Assignment2
                 {
                     canvasShape = EShape.Circle;
                 }
-                canvasShape = EShape.IsoscelesTriangle;
+                else
+                {
+                    canvasShape = EShape.IsoscelesTriangle;
+                }
             }
 
             return canvasShape == shape ? true : false;
