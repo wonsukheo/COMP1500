@@ -111,40 +111,44 @@ namespace Assignment2
         {
             int rowLength = canvas.GetLength(0);
             int colLength = canvas.GetLength(1);
-
-            if (rowLength == 0 || colLength == 0)
+            int width = colLength - 4;
+            int height = rowLength - 4;
+            
+            if (width == 0 && height == 0)
             {
                 return false;
             }
 
-            EShape canvasShape = EShape.Circle;
             int dotCount1 = 0;
             int dotCount2 = 0;
-            for (int i = 2; i < colLength - 2; ++i)
+
+            for (int i = 2; i < 2 + width; ++i)
             {
-                if (canvas[rowLength - 3, i] == '*')
+                if (canvas[height + 1, i] == '*')
                 {
                     dotCount1++;
                 }
-                if (canvas[rowLength - 4, i] == '*')
+                if (canvas[height, i] == '*')
                 {
                     dotCount2++;
                 }
             }
             
+            EShape canvasShape = EShape.Circle;
+            
             if (dotCount1 == dotCount2)
             {
                 canvasShape = EShape.Rectangle;
             } 
-            else if (dotCount1 - dotCount2 == 1 && colLength == rowLength)
+            else if (dotCount1 - dotCount2 == 1)
             {
                 canvasShape = EShape.IsoscelesRightTriangle;
-            } 
-            else if (dotCount1 - dotCount2 == 2 && colLength - 4 == (rowLength - 4) * 2 - 1)
+            }
+            else if (dotCount1 - dotCount2 == 2)
             {
                 canvasShape = EShape.IsoscelesTriangle;
             }
-            
+
             return canvasShape == shape ? true : false;
         }
     }
