@@ -136,11 +136,11 @@ namespace Assignment2
             {
                 canvasShape = EShape.Rectangle;
             } 
-            else if (dotCount1 - dotCount2 == 1)
+            else if (dotCount1 - dotCount2 == 1 && colLength == rowLength)
             {
                 canvasShape = EShape.IsoscelesRightTriangle;
             } 
-            else if (dotCount1 - dotCount2 == 2)
+            else if (dotCount1 - dotCount2 == 2 && colLength - 4 == (rowLength - 4) * 2 - 1)
             {
                 canvasShape = EShape.IsoscelesTriangle;
             }
