@@ -109,36 +109,42 @@ namespace Assignment2
 
         public static bool IsShape(char[,] canvas, EShape shape)
         {
-            if (canvas.GetLength(0) == 0 || canvas.GetLength(1) == 0)
+            int rowLength = canvas.GetLength(0);
+            int colLength = canvas.GetLength(1);
+
+            if (rowLength == 0 || colLength == 0)
             {
                 return false;
             }
 
-            EShape canvasShape;
-
-            if (canvas[2, 2] == '*' && canvas[3, 2] == '*')
+            EShape canvasShape = EShape.Circle;
+            int dotCount1 = 0;
+            int dotCount2 = 0;
+            for (int i = 2; i < colLength - 2; ++i)
             {
-                if (canvas[2, 3] == '*' && canvas[3, 3] == '*')
+                if (canvas[rowLength - 3, i] == '*')
                 {
-                    canvasShape = EShape.Rectangle;
+                    dotCount1++;
                 }
-                else
+                if (canvas[rowLength - 4, i] == '*')
                 {
-                    canvasShape = EShape.IsoscelesRightTriangle;
+                    dotCount2++;
                 }
             }
-            else
+            
+            if (dotCount1 == dotCount2)
             {
-                if (canvas.GetLength(0) == canvas.GetLength(1))
-                {
-                    canvasShape = EShape.Circle;
-                }
-                else
-                {
-                    canvasShape = EShape.IsoscelesTriangle;
-                }
+                canvasShape = EShape.Rectangle;
+            } 
+            else if (dotCount1 - dotCount2 == 1)
+            {
+                canvasShape = EShape.IsoscelesRightTriangle;
+            } 
+            else if (dotCount1 - dotCount2 == 2)
+            {
+                canvasShape = EShape.IsoscelesTriangle;
             }
-
+            
             return canvasShape == shape ? true : false;
         }
     }
