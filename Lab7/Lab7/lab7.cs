@@ -7,59 +7,64 @@ namespace Lab7
     {
         public static bool PlayGame(uint[] array)
         {
-            uint[] copyArray = new uint[array.Length];
+            int arrayLength = array.Length;
 
-            if (array.Length < 2 || array.Length <= array[0])
-            {
-                return false;
-            }
-            for (int i = 0; i < array.Length - 1; i++)
+            uint[] copyArray = new uint[arrayLength];
+
+            for (int i = 0; i < arrayLength - 1; i++)
             {
                 copyArray[i] = array[i];
             }
-
-
-            return RecursiveFunction(copyArray, array.Length - 1);
+            //check pre-condition
+            if (arrayLength < 2 || arrayLength <= array[0])
+            {
+                return false;
+            }
+            
+            return RecursiveJump(copyArray, arrayLength - 1);
         }
 
-        public static bool RecursiveFunction(uint[] array, int index, int lastindex = 0)
+        public static bool RecursiveJump(uint[] array, int startIndex, int previousIndex = 0)
         {
             // end condition
-            if (index == array[0])
+            if (startIndex == array[0])
             {
                 return true;
             }
-            int j = 0;
-            while (array[j++] == 0)
+
+            int i = 0;
+            int arrayLength = array.Length;
+
+            while (array[i++] == 0)
             {
-                if (j == array.Length)
+                if (i == arrayLength)
                 {
                     return false;
                 }
             }
 
-            for (int i = 1; i < array.Length - 1; ++i)
+            for (i = 1; i < arrayLength - 1; ++i)
             {
-                if (i + array[i] == index || i - array[i] == index)
+                if (i + array[i] == startIndex || i - array[i] == startIndex)
                 {
-                    if (i == lastindex)
+                    if (i == previousIndex)
                     {
-                        array[index] = 0;
-                        array[lastindex] = 0;
-                        return RecursiveFunction(array, array.Length - 1);
+                        array[startIndex] = 0;
+                        array[previousIndex] = 0;
+                        return RecursiveJump(array, arrayLength - 1);
                     }
 
-                    return RecursiveFunction(array, i, index);
+                    return RecursiveJump(array, i, startIndex);
                 }
             }
-
-            if (index == array.Length -1)
+            
+            if (startIndex == arrayLength - 1)
             {
                 return false;
             }
 
-            array[index] = 0;
-            return RecursiveFunction(array, array.Length - 1);
+            array[startIndex] = 0;
+            return RecursiveJump(array, arrayLength - 1);
         }
     }
 }
