@@ -7,12 +7,19 @@ namespace Lab7
     {
         public static bool PlayGame(uint[] array)
         {
+            uint[] copyArray = new uint[array.Length];
+
             if (array.Length < 2 || array.Length <= array[0])
             {
                 return false;
             }
+            for (int i = 0; i < array.Length - 1; i++)
+            {
+                copyArray[i] = array[i];
+            }
 
-            return RecursiveFunction(array, array.Length - 1);
+
+            return RecursiveFunction(copyArray, array.Length - 1);
         }
 
         public static bool RecursiveFunction(uint[] array, int index, int lastindex = 0)
