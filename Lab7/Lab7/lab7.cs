@@ -50,7 +50,7 @@ namespace Lab7
                     if (i == previousIndex)
                     {
                         array[startIndex] = 0;
-                        array[previousIndex] = 0;
+                        //array[previousIndex] = 0;
                         return RecursiveJump(array, arrayLength - 1);
                     }
 
