@@ -43,15 +43,10 @@ namespace Lab7
                 }
             }
 
-            for (i = 1; i < arrayLength - 1; ++i)
+            for (i = 0; i < arrayLength - 1; ++i)
             {
                 if (i + array[i] == startIndex || i - array[i] == startIndex)
                 {
-                    if (array[i] == 0)
-                    {
-                        continue;
-                    }
-
                     if (i == previousIndex)
                     {
                         array[startIndex] = 0;
