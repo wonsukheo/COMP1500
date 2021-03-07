@@ -47,6 +47,11 @@ namespace Lab7
             {
                 if (i + array[i] == startIndex || i - array[i] == startIndex)
                 {
+                    if (array[i] == 0)
+                    {
+                        continue;
+                    }
+
                     if (i == previousIndex)
                     {
                         array[startIndex] = 0;
