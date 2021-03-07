@@ -21,10 +21,10 @@ namespace Lab7
                 return false;
             }
             
-            return RecursiveJump(copyArray, arrayLength - 1);
+            return Move(copyArray, arrayLength - 1);
         }
 
-        public static bool RecursiveJump(uint[] array, int startIndex, int previousIndex = 0)
+        public static bool Move(uint[] array, int startIndex, int previousIndex = 0)
         {
             // end condition
             if (startIndex == array[0])
@@ -32,7 +32,7 @@ namespace Lab7
                 return true;
             }
 
-            int i = 0;
+            int i = 1;
             int arrayLength = array.Length;
 
             while (array[i++] == 0)
@@ -50,11 +50,10 @@ namespace Lab7
                     if (i == previousIndex)
                     {
                         array[startIndex] = 0;
-                        //array[previousIndex] = 0;
-                        return RecursiveJump(array, arrayLength - 1);
+                        return Move(array, arrayLength - 1);
                     }
-
-                    return RecursiveJump(array, i, startIndex);
+                    
+                    return Move(array, i, startIndex);
                 }
             }
             
@@ -64,7 +63,7 @@ namespace Lab7
             }
 
             array[startIndex] = 0;
-            return RecursiveJump(array, arrayLength - 1);
+            return Move(array, arrayLength - 1);
         }
     }
 }
