@@ -27,7 +27,7 @@ namespace Lab7
         public static bool Move(uint[] array, int startIndex, int previousIndex = 0)
         {
             // end condition
-            if (startIndex == array[0])
+            if (startIndex == array[0] || startIndex == 0)
             {
                 return true;
             }
