@@ -35,13 +35,13 @@ namespace Lab7
             int i = 1;
             int arrayLength = array.Length;
 
-            while (array[i++] == 0)
+            /*while (array[i++] == 0)
             {
                 if (i == arrayLength)
                 {
                     return false;
                 }
-            }
+            }*/
 
             for (i = 0; i < arrayLength - 1; ++i)
             {
