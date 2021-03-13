@@ -9,73 +9,61 @@ namespace Lab8
         public static string PrettifyList(string s)
         {
             // check pre-conditions
-            if (s == null || s.Length == 0)
+            if (String.IsNullOrWhiteSpace(s) || s.Length == 0)
             {
                 return null;
             }
-            for (int i = 0; i < s.Length - 1; i++)
-            {
-                if (s[i] != ' ')
-                {
-                    break;
-                }
-                
-                if (i == s.Length - 1)
-                {
-                    return null;
-                }
-            }
 
-            StringBuilder newString = new StringBuilder(4096);
+            StringBuilder prettifyString = new StringBuilder(4096);
 
             string[] firstLevel = s.Split('|');
 
-            char firstLevelChar = '1';
+            char firstLevelLabel = '1';
 
             for (int i = 0; i < firstLevel.Length; i++)
             {
                 if (firstLevel[i] != null)
                 {
-                    //char secondLevelChar = 'a';
-                    newString.Append($"{firstLevelChar}) ");  //newString.Insert(0, $"{firstLevelChar}) ");
-                    firstLevelChar++;
+                    prettifyString.Append($"{firstLevelLabel}) ");
+                    firstLevelLabel++;
 
-                    newString.Append(firstLevel[i]);   // what if arg is null. exception throw?
+                    prettifyString.Append(firstLevel[i]);
 
-                    char secondLevelChar = 'a';
+                    char secondLevelLable = 'a';
                     char secondLevelCharDouble = 'a';
                     char secondLevelCharTripple = 'a';
 
                     int j = 0;
-                    for (; j < newString.Length; j++)
+                    for (; j < prettifyString.Length; j++)
                     {
-                        if (firstLevelChar != 1 && newString[j] == '_')
+                        if (firstLevelLabel != 1 && prettifyString[j] == '_')
                         {
-                            if (secondLevelChar > 'z')
+                            if (secondLevelLable > 'z')
                             {
-                                newString.Replace("_", $"\n    {secondLevelCharDouble}{secondLevelCharDouble}) ", j, 1);
+                                prettifyString.Replace("_", $"\n    {secondLevelCharDouble}{secondLevelCharDouble}) ", j, 1);
                                 secondLevelCharDouble++;
                             }
                             if (secondLevelCharDouble > 'z')
                             {
-                                newString.Replace("_", $"\n    {secondLevelCharTripple}{secondLevelCharTripple}{secondLevelCharTripple}) ", j, 1);
+                                prettifyString.Replace("_", $"\n    {secondLevelCharTripple}{secondLevelCharTripple}{secondLevelCharTripple}) ", j, 1);
                                 secondLevelCharTripple++;
                             }
 
-                            newString.Replace("_", $"\n    {secondLevelChar}) ", j, 1);
-                            secondLevelChar++;
+                            prettifyString.Replace("_", $"\n    {secondLevelLable}) ", j, 1);
+                            secondLevelLable++;
                         }
 
-                        if (secondLevelChar != 'a' && newString[j] == '/')
+                        if (secondLevelLable != 'a' && prettifyString[j] == '/')
                         {
-                            newString.Replace("/", $"\n\t- ", j, 1);
+                            prettifyString.Replace("/", $"\n        - ", j, 1);
+                            //prettifyString.Replace("/", $"\n\t- ", j, 1);
                         }
                     }
-                    newString.AppendLine();
+                    prettifyString.AppendLine();
                 }
             }
             
-            return newString.ToString();
+            return prettifyString.ToString();
         }
     }
 }
