@@ -51,9 +51,10 @@ namespace Lab8
                         {
                             prettifyString.Replace("/", "\n        - ", j, 1);
                         }
+                        firstLevelLabel++;
                     }
                     prettifyString.AppendLine();
-                    firstLevelLabel++;
+
                 }
             }
             
