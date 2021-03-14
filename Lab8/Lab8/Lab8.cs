@@ -22,41 +22,46 @@ namespace Lab8
 
             if (firstLevel != null)
             {
+                return s;
+            }
+            else
+            { 
                 for (int i = 0; i < firstLevel.Length; i++)
                 {
-                    prettifyString.Append($"{firstLevelLabel}) ");
-                    firstLevelLabel++;
-
-                    prettifyString.Append(firstLevel[i]);
-
-                    string secondLevelLable = "abcdefghijklmnopqrstuvwxyz";
-                    int secondLevelCount = 0;
-
-                    int j = 0;
-                    for (; j < prettifyString.Length; j++)
+                    if (firstLevel[i] != null)
                     {
-                        if (firstLevelLabel != 1 && prettifyString[j] == '_')
-                        {
-                            prettifyString.Replace("_", $"\n    {secondLevelLable[secondLevelCount % secondLevelLable.Length]}) ", j, 1);
+                        prettifyString.Append($"{firstLevelLabel}) ");
+                        firstLevelLabel++;
 
-                            for (int k = 0; k < secondLevelCount / secondLevelLable.Length; k++)
+                        prettifyString.Append(firstLevel[i]);
+
+                        string secondLevelLable = "abcdefghijklmnopqrstuvwxyz";
+                        int secondLevelCount = 0;
+
+                        int j = 0;
+                        for (; j < prettifyString.Length; j++)
+                        {
+                            if (firstLevelLabel != 1 && prettifyString[j] == '_')
                             {
-                                prettifyString.Insert(j + 5, $"{secondLevelLable[secondLevelCount % secondLevelLable.Length]}");
+                                prettifyString.Replace("_", $"\n    {secondLevelLable[secondLevelCount % secondLevelLable.Length]}) ", j, 1);
+
+                                for (int k = 0; k < secondLevelCount / secondLevelLable.Length; k++)
+                                {
+                                    prettifyString.Insert(j + 5, $"{secondLevelLable[secondLevelCount % secondLevelLable.Length]}");
+                                }
+
+                                secondLevelCount++;
                             }
 
-                            secondLevelCount++;
+                            if (secondLevelCount != 0 && prettifyString[j] == '/')
+                            {
+                                prettifyString.Replace("/", "\n        - ", j, 1);
+                            }
                         }
-
-                        if (secondLevelCount != 0 && prettifyString[j] == '/')
-                        {
-                            prettifyString.Replace("/", "\n        - ", j, 1);
-                        }
+                        prettifyString.AppendLine();
                     }
-                    prettifyString.AppendLine();
                 }
-            }
-            
-            
+            }          
             return prettifyString.ToString();
         }
     }
