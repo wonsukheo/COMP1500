@@ -20,7 +20,7 @@ namespace Lab8
 
             char firstLevelLabel = '1';
 
-            if (firstLevel != null)
+            if (firstLevel == null)
             {
                 return s;
             }
