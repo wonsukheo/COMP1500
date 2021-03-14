@@ -25,7 +25,7 @@ namespace Lab8
                 if (firstLevel[i] != null)
                 {
                     prettifyString.Append($"{firstLevelLabel}) ");
-                    firstLevelLabel++;
+
 
                     prettifyString.Append(firstLevel[i]);
 
@@ -35,7 +35,7 @@ namespace Lab8
                     int j = 0;
                     for (; j < prettifyString.Length; j++)
                     {
-                        if (firstLevelLabel != 2 && prettifyString[j] == '_')
+                        if (firstLevelLabel != 1 && prettifyString[j] == '_')
                         {
                             prettifyString.Replace("_", $"\n    {secondLevelLable[secondLevelCount % secondLevelLable.Length]}) ", j, 1);
 
@@ -51,8 +51,8 @@ namespace Lab8
                         {
                             prettifyString.Replace("/", "\n        - ", j, 1);
                         }
-
                     }
+                    firstLevelLabel++;
                     prettifyString.AppendLine();
                 }
             }
