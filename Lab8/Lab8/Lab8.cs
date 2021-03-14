@@ -25,7 +25,7 @@ namespace Lab8
                 if (firstLevel[i] != null)
                 {
                     prettifyString.Append($"{firstLevelLabel}) ");
-
+                    firstLevelLabel++;   // 여기에 넣으면 "두 번째 레벨은 첫 번째 레벨 목록이 있어야 존재합니다" 를 따르지못함
 
                     prettifyString.Append(firstLevel[i]);
 
@@ -52,7 +52,7 @@ namespace Lab8
                             prettifyString.Replace("/", "\n        - ", j, 1);
                         }
                     }
-                    firstLevelLabel++;
+                    // firstLevelLabel++; 여기에 넣으면 오히려 더 많은 테스트를 통과하지 못하게됨
                     prettifyString.AppendLine();
                 }
             }
