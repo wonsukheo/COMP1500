@@ -29,31 +29,25 @@ namespace Lab8
 
                     prettifyString.Append(firstLevel[i]);
 
-                    char secondLevelLable = 'a';
-                    char secondLevelCharDouble = 'a';
-                    char secondLevelCharTripple = 'a';
+                    string secondLevelLable = "abcdefghijklmnopqrstuvwxyz";
+                    int secondLevelCount = 0;
 
                     int j = 0;
                     for (; j < prettifyString.Length; j++)
                     {
                         if (firstLevelLabel != 1 && prettifyString[j] == '_')
                         {
-                            if (secondLevelLable > 'z')
+                            prettifyString.Replace("_", $"\n    {secondLevelLable[secondLevelCount % secondLevelLable.Length]}) ", j, 1);
+
+                            for (int k = 0; k < secondLevelCount / secondLevelLable.Length; k++)
                             {
-                                prettifyString.Replace("_", $"\n    {secondLevelCharDouble}{secondLevelCharDouble}) ", j, 1);
-                                secondLevelCharDouble++;
-                            }
-                            if (secondLevelCharDouble > 'z')
-                            {
-                                prettifyString.Replace("_", $"\n    {secondLevelCharTripple}{secondLevelCharTripple}{secondLevelCharTripple}) ", j, 1);
-                                secondLevelCharTripple++;
+                                prettifyString.Insert(j + 5, $"{secondLevelLable[secondLevelCount % secondLevelLable.Length]}");
                             }
 
-                            prettifyString.Replace("_", $"\n    {secondLevelLable}) ", j, 1);
-                            secondLevelLable++;
+                            secondLevelCount++;
                         }
-
-                        if (secondLevelLable != 'a' && prettifyString[j] == '/')
+                        
+                        if (secondLevelCount != 0 && prettifyString[j] == '/')
                         {
                             prettifyString.Replace("/", $"\n        - ", j, 1);
                             //prettifyString.Replace("/", $"\n\t- ", j, 1);
