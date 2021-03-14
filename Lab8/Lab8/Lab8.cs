@@ -16,52 +16,46 @@ namespace Lab8
 
             StringBuilder prettifyString = new StringBuilder(4096);
 
-            string[] firstLevel = s.Contains('|') ? s.Split('|') : null; 
+            string[] firstLevel = s.Split('|'); 
 
             char firstLevelLabel = '1';
 
-            if (firstLevel == null)
+            for (int i = 0; i < firstLevel.Length; i++)
             {
-                return s;
-            }
-            else
-            { 
-                for (int i = 0; i < firstLevel.Length; i++)
+                if (firstLevel[i] != null)
                 {
-                    if (firstLevel[i] != null)
+                    prettifyString.Append($"{firstLevelLabel}) ");
+                    firstLevelLabel++;
+
+                    prettifyString.Append(firstLevel[i]);
+
+                    string secondLevelLable = "abcdefghijklmnopqrstuvwxyz";
+                    int secondLevelCount = 0;
+
+                    int j = 0;
+                    for (; j < prettifyString.Length; j++)
                     {
-                        prettifyString.Append($"{firstLevelLabel}) ");
-                        firstLevelLabel++;
-
-                        prettifyString.Append(firstLevel[i]);
-
-                        string secondLevelLable = "abcdefghijklmnopqrstuvwxyz";
-                        int secondLevelCount = 0;
-
-                        int j = 0;
-                        for (; j < prettifyString.Length; j++)
+                        if (firstLevelLabel != 1 && prettifyString[j] == '_')
                         {
-                            if (firstLevelLabel != 1 && prettifyString[j] == '_')
+                            prettifyString.Replace("_", $"\n    {secondLevelLable[secondLevelCount % secondLevelLable.Length]}) ", j, 1);
+
+                            for (int k = 0; k < secondLevelCount / secondLevelLable.Length; k++)
                             {
-                                prettifyString.Replace("_", $"\n    {secondLevelLable[secondLevelCount % secondLevelLable.Length]}) ", j, 1);
-
-                                for (int k = 0; k < secondLevelCount / secondLevelLable.Length; k++)
-                                {
-                                    prettifyString.Insert(j + 5, $"{secondLevelLable[secondLevelCount % secondLevelLable.Length]}");
-                                }
-
-                                secondLevelCount++;
+                                prettifyString.Insert(j + 5, $"{secondLevelLable[secondLevelCount % secondLevelLable.Length]}");
                             }
 
-                            if (secondLevelCount != 0 && prettifyString[j] == '/')
-                            {
-                                prettifyString.Replace("/", "\n        - ", j, 1);
-                            }
+                            secondLevelCount++;
                         }
-                        prettifyString.AppendLine();
+
+                        if (secondLevelCount != 0 && prettifyString[j] == '/')
+                        {
+                            prettifyString.Replace("/", "\n        - ", j, 1);
+                        }
                     }
+                    prettifyString.AppendLine();
                 }
-            }          
+            }
+            
             return prettifyString.ToString();
         }
     }
