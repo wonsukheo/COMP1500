@@ -16,13 +16,13 @@ namespace Lab8
 
             StringBuilder prettifyString = new StringBuilder(4096);
 
-            string[] firstLevel = s.Split('|');
+            string[] firstLevel = s.Contains('|') ? s.Split('|') : null; 
 
             char firstLevelLabel = '1';
 
-            for (int i = 0; i < firstLevel.Length; i++)
+            if (firstLevel != null)
             {
-                if (firstLevel[i] != null)
+                for (int i = 0; i < firstLevel.Length; i++)
                 {
                     prettifyString.Append($"{firstLevelLabel}) ");
                     firstLevelLabel++;
@@ -46,16 +46,16 @@ namespace Lab8
 
                             secondLevelCount++;
                         }
-                        
+
                         if (secondLevelCount != 0 && prettifyString[j] == '/')
                         {
-                            prettifyString.Replace("/", $"\n        - ", j, 1);
-                            //prettifyString.Replace("/", $"\n\t- ", j, 1);
+                            prettifyString.Replace("/", "\n        - ", j, 1);
                         }
                     }
                     prettifyString.AppendLine();
                 }
             }
+            
             
             return prettifyString.ToString();
         }
