@@ -18,14 +18,14 @@ namespace Lab8
 
             string[] firstLevel = s.Split('|'); 
 
-            char firstLevelLabel = '1';
+            int firstLevelLabel = 1;
 
             for (int i = 0; i < firstLevel.Length; i++)
             {
                 if (firstLevel[i] != null)
                 {
                     prettifyString.Append($"{firstLevelLabel}) ");
-                    firstLevelLabel++;
+
 
                     prettifyString.Append(firstLevel[i]);
 
@@ -53,6 +53,7 @@ namespace Lab8
                         }
                     }
                     prettifyString.AppendLine();
+                    firstLevelLabel++;
                 }
             }
             
