@@ -48,7 +48,13 @@ namespace Lab9
         public static Dictionary<string, int> CombineListsToDictionary(List<string> keys, List<int> values)
         {
             int combinedCapacity = keys.Count > values.Count ? values.Count : keys.Count;
+
             Dictionary<string, int> combinedDictionary = new Dictionary<string, int>(combinedCapacity);
+
+            if (combinedCapacity == 0)
+            {
+                return combinedDictionary;
+            }
 
             for (int i = 0; i < keys.Count; i++)
             {
@@ -59,10 +65,6 @@ namespace Lab9
                 }
             }
 
-            /*foreach (KeyValuePair<string, int> dictionary in combinedDictionary)
-            {
-                Console.WriteLine($"Key: {dictionary.Key} // Value: {dictionary.Value}");
-            }*/
             return combinedDictionary;
         }
 
