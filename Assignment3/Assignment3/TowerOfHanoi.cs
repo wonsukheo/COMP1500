@@ -7,38 +7,42 @@ namespace Assignment3
     {
         public static int GetNumberOfSteps(int numDiscs)
         {
-            if (numDiscs < 1)
+            if (numDiscs < 0)
             {
                 return -1;
             }    
-            else if (numDiscs == 1)
+            else if (numDiscs <= 1)
             {
-                return 1;
+                return numDiscs;
             }
-            return GetNumberOfSteps(numDiscs - 1) * 2 + 1;
+            else
+            {
+                return GetNumberOfSteps(numDiscs - 1) * 2 + 1;
+            }
         }
         public static List<List<int>[]> SolveTowerOfHanoi(int numDiscs)
         {
-            int timetotal = GetNumberOfSteps(numDiscs);
-            
-            List<int> firstStep = new List<int>(numDiscs);
             List<int>[] secondStep = new List<int>[3];
-            List<List<int>[]> thirdStep = new List<List<int>[]>(timetotal);
+            List<List<int>[]> thirdStep = new List<List<int>[]>();
 
-            for (int i = numDiscs; i != 0; i--)
+            if (numDiscs < 1)
             {
-                firstStep.Add(i);
+                return thirdStep;
             }
-            secondStep[0] = firstStep;
 
-            for (int i = 1; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 secondStep[i] = new List<int>(0);
             }
 
             thirdStep.Add(secondStep);
 
-            thirdStep = MoveDiscs(numDiscs, 0, 2 ,1, thirdStep);
+            for (int i = numDiscs; i != 0; i--)
+            {
+                secondStep[0].Add(i);
+            }
+
+            thirdStep = MoveDiscs(numDiscs, 0, 2 , 1, thirdStep);
 
             return thirdStep;
         }
@@ -51,7 +55,7 @@ namespace Assignment3
             }
             //move source to dest
 
-            List<int>[] secondStep = new List<int>[3] { new List<int>(), new List<int>(), new List<int>()};
+            List<int>[] secondStep = new List<int>[3] { new List<int>(), new List<int>(), new List<int>() };
             List<int> firstStep = new List<int>(numDiscs);
             
             for (int i = 0; i < 3; i++)
@@ -70,6 +74,7 @@ namespace Assignment3
             {
                 MoveDiscs(numDiscs - 1, temp, dest, source, listByStep);
             }
+            
             return listByStep;
         }
     }
