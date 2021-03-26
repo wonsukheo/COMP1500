@@ -29,7 +29,7 @@ namespace Lab10
 
         public double GetArea()
         {
-            double area = Radius * Radius * PI;
+            double area = Radius * Radius * mPI;
 
             return (int)(area * 1000 + 0.5) / (double)1000;
         }

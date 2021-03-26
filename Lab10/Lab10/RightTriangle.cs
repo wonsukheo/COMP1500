@@ -14,10 +14,10 @@ namespace Lab10
 
         public double GetPerimeter()
         {
-            if (Width == 0 || Height == 0)
+            /*if (Width == 0 || Height == 0)
             {
                 return 0.0000;
-            }
+            }*/
 
             uint sqrt = (Width * Width) + (Height * Height);
 
