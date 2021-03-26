@@ -8,7 +8,7 @@ namespace Lab10
 
         public uint Diameter { get; private set; }
 
-        private const double PI = 3.1415926535897931;
+        private const double mPI = 3.1415926535897931;
         public Circle(uint radius)
         {
             Radius = radius;
@@ -22,7 +22,7 @@ namespace Lab10
                 return 0.0000;
             }
 
-            double perimeter = Radius * 2 * PI;
+            double perimeter = Radius * 2 * mPI;
 
             return (int)(perimeter * 1000 + 0.5) / (double)1000;
         }
