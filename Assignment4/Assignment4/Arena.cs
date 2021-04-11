@@ -31,7 +31,7 @@ namespace Assignment4
 
                 monsterData = File.ReadAllLines(filepath);
 
-                for (int i = 0; i < monsterData.Length; i++)
+                for (int i = 0; i < Capacity; i++)
                 {
                     string[] monsterInfo = new string[5];
 
@@ -56,38 +56,36 @@ namespace Assignment4
 
         public void GoToNextTurn()
         {
-            for (int i = 0; i < MonsterCount; i++)
+            if (MonsterCount > 1)
             {
-                if (MonsterCount == 1)
+                for (int i = 0; i < MonsterCount; i++)
                 {
-                    break;
-                }
-
-                if (i == MonsterCount - 1)
-                {
-                    arenaMonsterList[i].Attack(arenaMonsterList[0]);
-
-                    if (arenaMonsterList[0].Health == 0)
+                    if (i == MonsterCount - 1)
                     {
-                        arenaMonsterList.RemoveAt(0);
+                        arenaMonsterList[i].Attack(arenaMonsterList[0]);
 
-                        MonsterCount--;
+                        if (arenaMonsterList[0].Health == 0)
+                        {
+                            arenaMonsterList.RemoveAt(0);
+
+                            MonsterCount--;
+                        }
+                    }
+                    else
+                    {
+                        arenaMonsterList[i].Attack(arenaMonsterList[i + 1]);
+
+                        if (arenaMonsterList[i + 1].Health == 0)
+                        {
+                            arenaMonsterList.RemoveAt(i + 1);
+
+                            MonsterCount--;
+                        }
                     }
                 }
-                else
-                {
-                    arenaMonsterList[i].Attack(arenaMonsterList[i + 1]);
 
-                    if (arenaMonsterList[i + 1].Health == 0)
-                    {
-                        arenaMonsterList.RemoveAt(i + 1);
-
-                        MonsterCount--;
-                    }
-                }
+                Turns++;
             }
-
-            Turns++;
         }
         public Monster GetHealthiest()
         {
