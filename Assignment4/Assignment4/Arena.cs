@@ -25,24 +25,32 @@ namespace Assignment4
 
         public void LoadMonsters(string filepath)
         {
-            string[] monsterData = new string[Capacity];
-
-            monsterData = File.ReadAllLines(filepath);
-
-            for(int i = 0; i < monsterData.Length; i++)
+            try
             {
-                string[] monsterInfo = new string[5];
+                string[] monsterData = new string[Capacity];
 
-                monsterInfo = monsterData[i].Split(',');
+                monsterData = File.ReadAllLines(filepath);
 
-                string monsterName = monsterInfo[0];
-                EElementType monsterElementType = (EElementType)Enum.Parse(typeof(EElementType), monsterInfo[1]);
-                int monsterHealth = int.Parse(monsterInfo[2]);
-                int monsterAttack = int.Parse(monsterInfo[3]);
-                int monsterDefense = int.Parse(monsterInfo[4]);
-                arenaMonsterList.Add(new Monster(monsterName, monsterElementType, monsterHealth, monsterAttack, monsterDefense));
+                for (int i = 0; i < monsterData.Length; i++)
+                {
+                    string[] monsterInfo = new string[5];
 
-                MonsterCount++;
+                    monsterInfo = monsterData[i].Split(',');
+
+                    string monsterName = monsterInfo[0];
+                    EElementType monsterElementType = (EElementType)Enum.Parse(typeof(EElementType), monsterInfo[1]);
+                    int monsterHealth = int.Parse(monsterInfo[2]);
+                    int monsterAttack = int.Parse(monsterInfo[3]);
+                    int monsterDefense = int.Parse(monsterInfo[4]);
+                    arenaMonsterList.Add(new Monster(monsterName, monsterElementType, monsterHealth, monsterAttack, monsterDefense));
+
+                    MonsterCount++;
+                }
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine($"file not found: {e.Message}");
             }
         }
 
@@ -58,27 +66,27 @@ namespace Assignment4
                 if (i == MonsterCount - 1)
                 {
                     arenaMonsterList[i].Attack(arenaMonsterList[0]);
+
+                    if (arenaMonsterList[0].Health == 0)
+                    {
+                        arenaMonsterList.RemoveAt(0);
+
+                        MonsterCount--;
+                    }
                 }
                 else
                 {
                     arenaMonsterList[i].Attack(arenaMonsterList[i + 1]);
-                }
-            }
 
-            for (int i = 0; i < MonsterCount; i++)
-            {
-                if (arenaMonsterList[i].Health == 0)
-                {
-                    for(int j = i; j < MonsterCount - 1; j++)
+                    if (arenaMonsterList[i + 1].Health == 0)
                     {
-                        arenaMonsterList[j] = arenaMonsterList[j + 1];
+                        arenaMonsterList.RemoveAt(i + 1);
+
+                        MonsterCount--;
                     }
-
-                    arenaMonsterList.RemoveAt((int)MonsterCount - 1);
-
-                    MonsterCount--;
                 }
             }
+
             Turns++;
         }
         public Monster GetHealthiest()
