@@ -6,8 +6,6 @@ namespace Assignment4
 {
     public class Arena
     {
-        List<Monster> arenaMonsterList = new List<Monster>();
-
         public uint Capacity { get; private set; }
 
         public string ArenaName { get; private set; }
@@ -15,6 +13,8 @@ namespace Assignment4
         public uint Turns { get; private set; }
 
         public uint MonsterCount { get; private set; }
+
+        private List<Monster> mArenaMonsterList = new List<Monster>();
         public Arena(string arenaName, uint capacity)
         {
             Capacity = capacity;
@@ -42,7 +42,7 @@ namespace Assignment4
                     int monsterHealth = int.Parse(monsterInfo[2]);
                     int monsterAttack = int.Parse(monsterInfo[3]);
                     int monsterDefense = int.Parse(monsterInfo[4]);
-                    arenaMonsterList.Add(new Monster(monsterName, monsterElementType, monsterHealth, monsterAttack, monsterDefense));
+                    mArenaMonsterList.Add(new Monster(monsterName, monsterElementType, monsterHealth, monsterAttack, monsterDefense));
 
                     MonsterCount++;
                 }
@@ -62,22 +62,22 @@ namespace Assignment4
                 {
                     if (i == MonsterCount - 1)
                     {
-                        arenaMonsterList[i].Attack(arenaMonsterList[0]);
+                        mArenaMonsterList[i].Attack(mArenaMonsterList[0]);
 
-                        if (arenaMonsterList[0].Health == 0)
+                        if (mArenaMonsterList[0].Health == 0)
                         {
-                            arenaMonsterList.RemoveAt(0);
+                            mArenaMonsterList.RemoveAt(0);
 
                             MonsterCount--;
                         }
                     }
                     else
                     {
-                        arenaMonsterList[i].Attack(arenaMonsterList[i + 1]);
+                        mArenaMonsterList[i].Attack(mArenaMonsterList[i + 1]);
 
-                        if (arenaMonsterList[i + 1].Health == 0)
+                        if (mArenaMonsterList[i + 1].Health == 0)
                         {
-                            arenaMonsterList.RemoveAt(i + 1);
+                            mArenaMonsterList.RemoveAt(i + 1);
 
                             MonsterCount--;
                         }
@@ -94,13 +94,13 @@ namespace Assignment4
                 return null;
             }
 
-            Monster healthiestMonster = arenaMonsterList[0];
+            Monster healthiestMonster = mArenaMonsterList[0];
 
             for (int i = 1; i < MonsterCount; i++)
             {
-                if (arenaMonsterList[i].Health > healthiestMonster.Health)
+                if (mArenaMonsterList[i].Health > healthiestMonster.Health)
                 {
-                    healthiestMonster = arenaMonsterList[i];
+                    healthiestMonster = mArenaMonsterList[i];
                 }
             }
 
